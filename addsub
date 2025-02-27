@@ -30,8 +30,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity addsub is
-    Port ( a : in  STD_LOGIC_VECTOR (3 downto 0);
-           b : in  STD_LOGIC_VECTOR (3 downto 0);
+    Port ( a1 : in  STD_LOGIC_VECTOR (3 downto 0);
+           b1 : in  STD_LOGIC_VECTOR (3 downto 0);
            sw : in  STD_LOGIC;
            s : out  STD_LOGIC_VECTOR (3 downto 0);
            cout : out  STD_LOGIC);
@@ -48,7 +48,14 @@ end component;
 signal sig:std_logic_vector(3 downto 0);
 signal cp:std_logic_vector(2 downto 0);
 begin
-
+sig(0)<=b1(0) XOR sw;
+sig(1)<=b1(1) XOR sw;
+sig(2)<=b1(2) XOR sw;
+sig(3)<=b1(3) XOR sw;
+f1: fauha port map(a1(0),sig(0),sw,s(0),cp(0));
+f2: fauha port map(a1(1),sig(1),cp(0),s(1),cp(1));
+f3: fauha port map(a1(2),sig(2),cp(1),s(2),cp(2));
+f4: fauha port map(a1(3),sig(3),cp(2),s(3),cout);
 
 end Behavioral;
 
